@@ -12,6 +12,13 @@ enum class RequestType {
             plugin.registeredTasks.add(TaskType.valueOf(requestData.get("type").asString))
         }
     },
+    RegisterEvent {
+        override fun executeRequest(plugin: MplPlugin, requestData: JsonObject?) {
+            if (requestData == null) throw RequestDataException("Register event data is null.")
+            if (!requestData.has("type")) throw RequestDataException("Register event data is wrong.")
+            plugin.registeredEvents.add(requestData.get("type").asString)
+        }
+    },
     Log {
         override fun executeRequest(plugin: MplPlugin, requestData: JsonObject?) {
             if (requestData == null) throw RequestDataException("Log data is null.")

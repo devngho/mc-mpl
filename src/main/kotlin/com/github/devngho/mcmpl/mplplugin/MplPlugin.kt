@@ -20,8 +20,9 @@ class MplPlugin(
     val name: String
 ) {
     val registeredTasks = mutableListOf<TaskType>()
+    val registeredEvents = mutableListOf<String>()
     fun sendTask(task: Task){
-        if (registeredTasks.contains(task.taskType)) {
+        if (registeredTasks.contains(task.taskType) && (task.taskType != TaskType.Event || registeredEvents.contains(task.taskData?.get("type")?.asString))) {
             val send = JsonObject()
             send.addProperty("type", task.taskType.name)
             send.addProperty("id", task.taskId.toString())
