@@ -30,7 +30,7 @@ class BlockEvent : Listener {
         TaskType.Event.createTask(UUID.randomUUID(), obj).fire()
     }
     @EventHandler
-    fun onBlockBreakEvent(e: BlockCanBuildEvent){
+    fun onCanBuildEvent(e: BlockCanBuildEvent){
         val obj = JsonObject()
         obj.addProperty("type", e.eventName)
         obj.add("block", Serializer.block.serialize(e.block))
